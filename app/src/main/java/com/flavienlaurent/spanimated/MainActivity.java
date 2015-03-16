@@ -291,19 +291,21 @@ public class MainActivity extends Activity {
                 mBaconIpsumSpannableString.setSpan(span, wordPosition.start, wordPosition.end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
                 break;
         }
+
         if(span == null) {
             return;
         }
         mSpans.add(span);
         mText.setText(mBaconIpsumSpannableString);
     }
-    //Color
+    //Color alpha
     private void animateColorSpan() {
+        //Custom Span
         MutableForegroundColorSpan span = new MutableForegroundColorSpan(255, mTextColor);
         mSpans.add(span);
-        mSpans.clone() ;
         WordPosition wordPosition = getWordPosition(mBaconIpsum);
         mBaconIpsumSpannableString.setSpan(span, wordPosition.start, wordPosition.end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
+        //core code
         ObjectAnimator objectAnimator = ObjectAnimator.ofInt(span, MUTABLE_FOREGROUND_COLOR_SPAN_FC_PROPERTY, Color.BLACK, Color.RED);
         objectAnimator.setEvaluator(new ArgbEvaluator());
         objectAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -314,7 +316,8 @@ public class MainActivity extends Activity {
             }
         });
         objectAnimator.setInterpolator(mSmoothInterpolator);
-        objectAnimator.setDuration(600);
+        objectAnimator.setDuration(1000);
+        objectAnimator.setRepeatMode(ObjectAnimator.INFINITE);
         objectAnimator.start();
     }
 
@@ -365,6 +368,7 @@ public class MainActivity extends Activity {
     }
 
     private void animateTypeWriter() {
+        //set every letter  a initial span and return the group or sets
         TypeWriterSpanGroup spanGroup = buildTypeWriterSpanGroup(0, mBaconIpsum.length() - 1);
         ObjectAnimator objectAnimator = ObjectAnimator.ofFloat(spanGroup, TYPE_WRITER_GROUP_ALPHA_PROPERTY, 0.0f, 1.0f);
         objectAnimator.addUpdateListener(new ValueAnimator.AnimatorUpdateListener() {
@@ -435,9 +439,9 @@ public class MainActivity extends Activity {
                 }
             };
 
-
+    // set TyperWriterSpanCroup
     private TypeWriterSpanGroup buildTypeWriterSpanGroup(int start, int end) {
-        final TypeWriterSpanGroup group = new TypeWriterSpanGroup(0);
+        final TypeWriterSpanGroup group = new TypeWriterSpanGroup(0); // zero mean initial alpha status is invisible
         for(int index = start ; index <= end ; index++) {
             MutableForegroundColorSpan span = new MutableForegroundColorSpan(0, Color.BLACK);
             mSpans.add(span);
@@ -537,12 +541,15 @@ public class MainActivity extends Activity {
         }
 
         public void addSpan(MutableForegroundColorSpan span) {
+            //add span and set it invisible
             span.setAlpha((int) (mAlpha * 255));
             mSpans.add(span);
         }
-
+        // via this method to change all sentence alpha invoke as the Property(alpha) change 0.0 ~ 1.0
+        //Todo core logic and  logic confusion must think a little more
         public void setAlpha(float alpha) {
             int size = mSpans.size();
+            // sets %
             float total = 1.0f * size * alpha;
 
             if(DEBUG) Log.d(TAG, "alpha " + alpha + " * 1.0f * size => " + total);
