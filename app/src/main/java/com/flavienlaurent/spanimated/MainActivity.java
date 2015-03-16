@@ -301,7 +301,7 @@ public class MainActivity extends Activity {
     private void animateColorSpan() {
         MutableForegroundColorSpan span = new MutableForegroundColorSpan(255, mTextColor);
         mSpans.add(span);
-
+        mSpans.clone() ;
         WordPosition wordPosition = getWordPosition(mBaconIpsum);
         mBaconIpsumSpannableString.setSpan(span, wordPosition.start, wordPosition.end, Spanned.SPAN_EXCLUSIVE_EXCLUSIVE);
         ObjectAnimator objectAnimator = ObjectAnimator.ofInt(span, MUTABLE_FOREGROUND_COLOR_SPAN_FC_PROPERTY, Color.BLACK, Color.RED);
