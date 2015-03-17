@@ -51,6 +51,7 @@ import java.util.Locale;
 /**
  * annotation data 2015-3-17
  * modified by zhi lin
+ * hey! github successful push in Android Studio
  */
 public class MainActivity extends Activity {
 
