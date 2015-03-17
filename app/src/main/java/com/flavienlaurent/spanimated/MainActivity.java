@@ -48,6 +48,9 @@ import java.util.Collections;
 import java.util.HashSet;
 import java.util.Locale;
 
+/**
+ * annotation data 2015-3-17
+ */
 public class MainActivity extends Activity {
 
     private static String ANIMATED_WORD = "Im gonna be Animated!";
