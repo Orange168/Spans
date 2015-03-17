@@ -50,6 +50,7 @@ import java.util.Locale;
 
 /**
  * annotation data 2015-3-17
+ * modified by zhi lin
  */
 public class MainActivity extends Activity {
 
