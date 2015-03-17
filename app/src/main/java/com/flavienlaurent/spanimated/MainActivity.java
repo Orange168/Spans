@@ -483,7 +483,7 @@ public class MainActivity extends Activity {
             mSpanIndexes.add(mSpans.size());
             mSpans.add(span);
         }
-
+        // shuffle position randomly
         public void init() {
             Collections.shuffle(mSpans);
         }

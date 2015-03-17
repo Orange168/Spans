@@ -31,7 +31,6 @@ public class ViewPagerActivity extends Activity {
         super.onCreate(savedInstanceState);
 
         Resources resources = getResources();
-        sPicColors = new int[] {resources.getColor(R.color.color1), resources.getColor(R.color.color2), resources.getColor(R.color.color3), resources.getColor(R.color.color4), resources.getColor(R.color.color5)};
 
         setContentView(R.layout.activity_view_pager);
 
